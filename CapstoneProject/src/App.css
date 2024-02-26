@@ -1,0 +1,48 @@
+html,
+#root {
+  height: 100%;
+  width: 100%;
+  /* background-color: rgb(254, 254, 254);
+  color: rgb(0, 0, 0); */
+  margin-top: 0px;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+.NavBar {
+  margin-top: 0px;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+header {
+  margin-top: 0px;
+}
+
+@media (max-width: 600px) {
+  .NavBar {
+    font-size: 1.5rem;
+  }
+}
+
+a {
+  color: black;
+}
+
+.menu {
+  margin-top: 0px;
+}
+
+div {
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
