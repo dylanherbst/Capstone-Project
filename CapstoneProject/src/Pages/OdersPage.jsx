@@ -1,5 +1,5 @@
 import React from "react";
-import HomeStore from "../Components/DashboardComponent";
+import HomeStore from "../../../../DashboardComponent";
 import { useEffect } from "react";
 import { useUserContext } from "../Context/UserContext";
 
