@@ -6,34 +6,33 @@ import "./App.css";
 import NavBar from "./Components/NavBar";
 import { UserProvider } from "./Context/UserContext";
 import { ThemeProvider } from "@mui/material/styles";
-
 import AppRoutes from "./Routes/AppRoutes";
 import theme from "./Themes/theme";
+import SideBar from "./Components/SideBar";
+import { Box } from "@mui/system";
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    // <>
+    //   <ThemeProvider theme={theme}>
+    //     <CssBaseline />
+    //     <UserProvider>
 
-        <UserProvider>
-          <div style={{ width: "100vw", height: "80vh" }}>
-            <NavBar></NavBar>
-            {/* Add padding to the top of AppRoutes container */}
-            <div
-              style={{
-                paddingTop: "20px",
-                paddingLeft: "30px",
-                paddingRight: "30px",
-              }}
-            >
-              {/* Adjust the padding based on the height of your NavBar */}
-              <AppRoutes></AppRoutes>
-            </div>
-          </div>
-        </UserProvider>
-      </ThemeProvider>
-    </>
+    //       <NavBar></NavBar>
+    //       <SideBar></SideBar>
+    //       <AppRoutes></AppRoutes>
+    //     </UserProvider>
+    //   </ThemeProvider>
+    // </>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <UserProvider>
+        <NavBar />
+        {/* <SideBar /> */}
+        <AppRoutes />
+      </UserProvider>
+    </ThemeProvider>
   );
 }
+
 export default App;

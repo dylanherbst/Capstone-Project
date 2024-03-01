@@ -5,6 +5,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import UserAccountPage from "../Pages/UserAccountPage";
 import DashBoardPage from "../Pages/DashBoardPage";
 import ProductsPage from "../Pages/ProductPage";
+import CreateProductPage from "../Pages/CreateProductPage";
 
 function AppRoutes(props) {
   return (
@@ -34,6 +35,7 @@ function AppRoutes(props) {
         }
       /> */}
 
+      <Route path="/create" element={<CreateProductPage />} />
       <Route path="/createuser" element={<CreateProfilePage />} />
       <Route path="/account" element={<UserAccountPage />} />
       <Route path="/dashboard" element={<DashBoardPage />} />

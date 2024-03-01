@@ -8,6 +8,18 @@ import {
   Box,
   TextField,
 } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import ImageNotSupportedIcon from "@mui/icons-material/ImageNotSupported";
 
 const style = {
   position: "absolute",
@@ -47,23 +59,74 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
   };
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5">{updatedProduct.name}</Typography>
-        <Typography variant="body1">{updatedProduct.desc}</Typography>
-        <Typography variant="body2">Price: ${updatedProduct.price}</Typography>
-        <Typography variant="body2">Stock: {updatedProduct.stock}</Typography>
-        <Button variant="contained" color="primary" onClick={handleOpen}>
-          Update
-        </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => onDelete(product.id)}
-        >
-          Delete
-        </Button>
-      </CardContent>
+    <>
+      <TableRow>
+        <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
+          <Box
+            sx={{
+              width: 50, // Adjust the width of the image box
+              height: 50, // Adjust the height of the image box
+              overflow: "hidden",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: "4px", // Optional: for rounded corners
+            }}
+          >
+            {product.img ? (
+              <img
+                src={product.img}
+                alt={product.name}
+                style={{ width: "100%", height: "auto" }}
+              />
+            ) : (
+              <ImageNotSupportedIcon /> // Display an icon if there is no valid image
+            )}
+          </Box>
+        </TableCell>
+        <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
+          {product.name}
+        </TableCell>
+        <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
+          {product.stock}
+        </TableCell>
+        <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
+          ${product.price}
+        </TableCell>
+        <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleOpen}
+            size="small"
+            sx={{
+              marginRight: "10px",
+              padding: "4px 8px",
+              minWidth: "auto",
+              fontSize: "0.75rem",
+            }}
+          >
+            <EditIcon />
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => onDelete(product.id)}
+            size="small"
+            sx={{
+              marginRight: "10px",
+              padding: "4px 8px",
+              minWidth: "auto",
+              fontSize: "0.75rem",
+              "&:hover": {
+                backgroundColor: "#d32f2f",
+              },
+            }}
+          >
+            <DeleteIcon />
+          </Button>
+        </TableCell>
+      </TableRow>
 
       <Modal
         open={open}
@@ -113,8 +176,7 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
           </Button>
         </Box>
       </Modal>
-    </Card>
+    </>
   );
 };
-
 export default ProductItem;

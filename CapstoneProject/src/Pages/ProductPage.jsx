@@ -1,8 +1,31 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductItem from "../Components/ProductItem";
-import { Button } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Modal,
+  Box,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CreateProductModal from "../Components/CreateProductModal";
+import { Link } from "react-router-dom";
+
+const style = {
+  width: 900,
+  bgcolor: "background.paper",
+  p: 2,
+  margin: "auto",
+  marginBottom: "50px",
+  //   height: "100%",
+};
 
 const ProductPage = () => {
   const [products, setProducts] = useState([]);
@@ -40,27 +63,72 @@ const ProductPage = () => {
     }
   };
 
-  const handleCreateProduct = () => {
-    // Logic for creating a new product
-    console.log("Creating new product...");
-  };
-
-  const handleAddProduct = () => {
-    setOpen(false);
-    fetchProducts(); // Refresh the product list
-  };
-
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
-        Create New Product
-      </Button>
-      <CreateProductModal
-        open={open}
-        onClose={() => setOpen(false)}
-        onAdd={handleAddProduct}
-      />
-      {products.map((product) => (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "0 40px", // Adjust the padding as needed
+          marginBottom: "20px",
+        }}
+      >
+        <Typography variant="h5">Products</Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          component={Link}
+          to="/create" // Adjust the path to match your route for the Create Product page
+        >
+          Add Product
+        </Button>
+      </Box>
+
+      <Box sx={style}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell
+                  sx={{ borderLeft: "none", borderRight: "none" }}
+                ></TableCell>
+                <TableCell sx={{ borderLeft: "none", borderRight: "none" }}>
+                  Product Name
+                </TableCell>
+                <TableCell sx={{ borderLeft: "none", borderRight: "none" }}>
+                  Inventory
+                </TableCell>
+                <TableCell sx={{ borderLeft: "none", borderRight: "none" }}>
+                  Price
+                </TableCell>
+                <TableCell sx={{ borderLeft: "none", borderRight: "none" }}>
+                  Actions
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {products.map((product) => (
+                <ProductItem
+                  key={product.id}
+                  product={product}
+                  onUpdate={updateProduct}
+                  onDelete={deleteProduct}
+                />
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
+    </div>
+  );
+};
+
+export default ProductPage;
+
+{
+  /* {products.map((product) => (
         <ProductItem
           key={product.id}
           product={product}
@@ -70,6 +138,5 @@ const ProductPage = () => {
       ))}
     </div>
   );
-};
-
-export default ProductPage;
+}; */
+}

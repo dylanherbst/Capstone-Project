@@ -33,7 +33,7 @@ const theme = createTheme({
       main: colors.success,
     },
     background: {
-      default: "	rgb(229, 228, 226, 0.5)", // Set your desired background color here
+      default: "	rgb(229, 228, 226, 0.2)", // Set your desired background color here
     },
   },
   typography: {
