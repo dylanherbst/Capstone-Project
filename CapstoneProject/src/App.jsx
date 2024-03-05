@@ -13,22 +13,11 @@ import { Box } from "@mui/system";
 
 function App() {
   return (
-    // <>
-    //   <ThemeProvider theme={theme}>
-    //     <CssBaseline />
-    //     <UserProvider>
-
-    //       <NavBar></NavBar>
-    //       <SideBar></SideBar>
-    //       <AppRoutes></AppRoutes>
-    //     </UserProvider>
-    //   </ThemeProvider>
-    // </>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <UserProvider>
-        <NavBar />
-        {/* <SideBar /> */}
+        {/* <NavBar /> */}
+
         <AppRoutes />
       </UserProvider>
     </ThemeProvider>

@@ -2,6 +2,7 @@ import React from "react";
 import HomeStore from "../../../../DashboardComponent";
 import { useEffect } from "react";
 import { useUserContext } from "../Context/UserContext";
+import NavBar from "../Components/NavBar";
 
 export default function HomePage() {
   const store = HomeStore();
@@ -13,6 +14,7 @@ export default function HomePage() {
 
   return (
     <>
+      <NavBar />
       <div style={{ margin: "10px" }}>Welcome Back! {currentUser.userName}</div>
       <div
         style={{

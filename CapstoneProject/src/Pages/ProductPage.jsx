@@ -17,10 +17,10 @@ import {
 } from "@mui/material";
 import CreateProductModal from "../Components/CreateProductModal";
 import { Link } from "react-router-dom";
+import NavBar from "../Components/NavBar";
 
 const style = {
   width: 900,
-  bgcolor: "background.paper",
   p: 2,
   margin: "auto",
   marginBottom: "50px",
@@ -44,9 +44,13 @@ const ProductPage = () => {
     }
   };
 
-  const updateProduct = async (id) => {
+  const updateProduct = async (id, updatedProductData) => {
     try {
-      console.log("Update product with id:", id);
+      await axios.put(
+        `http://localhost:8081/api/products/${id}`,
+        updatedProductData
+      );
+      fetchProducts(); // Refresh the product list
     } catch (error) {
       console.error("Error updating product:", error);
     }
@@ -65,6 +69,8 @@ const ProductPage = () => {
 
   return (
     <div>
+      <NavBar />
+
       <Box
         sx={{
           display: "flex",
@@ -80,7 +86,7 @@ const ProductPage = () => {
           color="primary"
           size="small"
           component={Link}
-          to="/create" // Adjust the path to match your route for the Create Product page
+          to="/createproduct" // Adjust the path to match your route for the Create Product page
         >
           Add Product
         </Button>

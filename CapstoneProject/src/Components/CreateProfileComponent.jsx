@@ -1,179 +1,119 @@
-import { Box, Button, TextField } from "@mui/material";
-import { Formik } from "formik";
-import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Header from "./HeaderComponent";
+import React, { useState } from "react";
+import { Box, TextField, Button, Typography } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
-const NewUserForm = () => {
-  const isNonMobile = useMediaQuery("(min-width:600px)");
+const style = {
+  width: 700,
+  bgcolor: "background.paper",
+  p: 2,
+  margin: "auto",
+};
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
-  };
+const fieldStyle = {
+  bgcolor: "background.paper",
+  marginTop: "30px",
+  marginBottom: "30px",
+};
+
+const StepOne = ({ onNext }) => (
+  <Box>
+    <Typography variant="h6">Personal Information</Typography>
+    <TextField label="First Name" fullWidth margin="normal" />
+    <TextField label="Last Name" fullWidth margin="normal" />
+    <TextField label="Email" fullWidth margin="normal" />
+    <TextField label="Contact Numebr" fullWidth margin="normal" />
+    <Button variant="contained" onClick={onNext}>
+      Next
+    </Button>
+  </Box>
+);
+
+const StepTwo = ({ onBack, onNext }) => (
+  <Box>
+    <Typography variant="h6">Address Information</Typography>
+    <TextField label="Address" fullWidth margin="normal" />
+    <TextField label="Country" fullWidth margin="normal" />
+    <TextField label="State" fullWidth margin="normal" />
+    <TextField label="Suburb" fullWidth margin="normal" />
+    <TextField label="Street Address" fullWidth margin="normal" />
+    <Button variant="contained" onClick={onBack}>
+      Back
+    </Button>
+    <Button variant="contained" onClick={onNext} sx={{ marginLeft: "8px" }}>
+      Next
+    </Button>
+  </Box>
+);
+const StepThree = ({ onBack, onNext, role, setRole }) => (
+  <Box>
+    <Typography variant="h6" sx={{ marginTop: "16px" }}>
+      Choose your role:
+    </Typography>
+    <ToggleButtonGroup
+      color="primary"
+      value={role}
+      exclusive
+      onChange={(event, newRole) => setRole(newRole)}
+      sx={{ marginBottom: "16px" }}
+    >
+      <ToggleButton value="sales/marketing">Marketing</ToggleButton>
+      <ToggleButton value="admin">Admin</ToggleButton>
+      <ToggleButton value="customer_service">Customer Service</ToggleButton>
+    </ToggleButtonGroup>
+
+    <Button variant="contained" onClick={onBack}>
+      Back
+    </Button>
+    <Button variant="contained" onClick={onNext} sx={{ marginLeft: "8px" }}>
+      Next
+    </Button>
+  </Box>
+);
+
+const StepFour = ({ onBack, onSubmit }) => (
+  <Box>
+    <Typography variant="h6">Step 3: Review and Submit</Typography>
+    <Typography variant="body1">
+      Review your information and click submit.
+    </Typography>
+    <Button variant="contained" onClick={onBack}>
+      Back
+    </Button>
+    <Button variant="contained" onClick={onSubmit} sx={{ marginLeft: "8px" }}>
+      Submit
+    </Button>
+  </Box>
+);
+
+const StagedForm = () => {
+  const [step, setStep] = useState(1);
+  const [role, setRole] = useState("");
+
+  const handleNext = () => setStep((prevStep) => prevStep + 1);
+  const handleBack = () => setStep((prevStep) => prevStep - 1);
 
   return (
     <Box
       sx={{
-        height: "90vh", // Set the height to 100% of the viewport height
-        width: "100vw", // Set the width to 100% of the viewport width
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center", // Center the content vertically
-        alignItems: "center", // Center the content horizontally
-        m: 0, // Remove margin
-        p: 0, // Remove padding
-        // backgroundColor: "white",
+        width: 500,
+        margin: "auto",
+        marginTop: "32px",
+        bgcolor: "white",
+        padding: "30px",
+        borderRadius: "10px",
       }}
     >
-      <Box
-        sx={{
-          width: "90%", // Adjust the width of the inner box as needed
-
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "white", // Set the background color of the inner box to white
-          padding: "20px", // Add some padding to the inner box
-          borderRadius: "10px", // Optional: add a border radius for rounded corners
-        }}
-      >
-        <Header title="CREATE USER" subtitle="Create a New User Profile" />
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <Box
-                display="grid"
-                gap="30px"
-                gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-                sx={{
-                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                }}
-              >
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="First Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.firstName}
-                  name="firstName"
-                  error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
-                  sx={{ gridColumn: "span 2" }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Last Name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
-                  name="lastName"
-                  error={!!touched.lastName && !!errors.lastName}
-                  helperText={touched.lastName && errors.lastName}
-                  sx={{ gridColumn: "span 2" }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.email}
-                  name="email"
-                  error={!!touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Contact Number"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.contact}
-                  name="contact"
-                  error={!!touched.contact && !!errors.contact}
-                  helperText={touched.contact && errors.contact}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Address 1"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.address1}
-                  name="address1"
-                  error={!!touched.address1 && !!errors.address1}
-                  helperText={touched.address1 && errors.address1}
-                  sx={{ gridColumn: "span 4" }}
-                />
-                <TextField
-                  fullWidth
-                  variant="filled"
-                  type="text"
-                  label="Address 2"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.address2}
-                  name="address2"
-                  error={!!touched.address2 && !!errors.address2}
-                  helperText={touched.address2 && errors.address2}
-                  sx={{ gridColumn: "span 4" }}
-                />
-              </Box>
-              <Box display="flex" justifyContent="end" mt="20px">
-                <Button type="submit" color="secondary" variant="contained">
-                  Create New User
-                </Button>
-              </Box>
-            </form>
-          )}
-        </Formik>
-      </Box>
+      {step === 1 && <StepOne onNext={handleNext} />}
+      {step === 2 && <StepTwo onBack={handleBack} onNext={handleNext} />}
+      {step === 3 && <StepThree onBack={handleBack} onNext={handleNext} />}
+      {step === 4 && (
+        <StepFour
+          onBack={handleBack}
+          onSubmit={() => alert("Form submitted!")}
+        />
+      )}
     </Box>
   );
 };
 
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
-};
-
-export default NewUserForm;
+export default StagedForm;

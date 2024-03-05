@@ -35,9 +35,8 @@ const style = {
 
 const ProductItem = ({ product, onUpdate, onDelete }) => {
   const [open, setOpen] = useState(false);
-  const [updatedProduct, setUpdatedProduct] = useState({
-    ...product,
-  });
+  const [updatedProduct, setUpdatedProduct] = useState({ ...product });
+  const imageUrl = `http://localhost:8081/${product.img}`;
 
   const handleOpen = () => {
     setUpdatedProduct({ ...product });
@@ -54,7 +53,7 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
   };
 
   const handleUpdate = () => {
-    onUpdate(updatedProduct);
+    onUpdate(updatedProduct.id, updatedProduct);
     handleClose();
   };
 
@@ -75,7 +74,8 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
           >
             {product.img ? (
               <img
-                src={product.img}
+                // src={product.img}
+                src={imageUrl}
                 alt={product.name}
                 style={{ width: "100%", height: "auto" }}
               />

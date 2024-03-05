@@ -25,12 +25,15 @@ import UpdatesIcon from "@mui/icons-material/NewReleases";
 import SettingsIcon from "@mui/icons-material/Settings";
 import PersonalIcon from "@mui/icons-material/Person";
 import GlobalIcon from "@mui/icons-material/Public";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import { useState } from "react";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import { Link } from "react-router-dom";
 
-const drawerWidth = 140;
-
+const drawerWidth = 240;
 export default function SideBar() {
   const [open, setOpen] = useState(false);
   const handleDrawerToggle = () => {
@@ -38,14 +41,18 @@ export default function SideBar() {
   };
 
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon /> },
-    { text: "Orders", icon: <ShoppingCartIcon /> },
+    { text: "Dashboard", icon: <DashboardIcon />, link: "/dashboard" },
+    { text: "Accounts", icon: <ManageAccountsIcon />, link: "/createuser" },
     // Add more menu items here
   ];
 
   const infoItems = [
-    { text: "Knowledge Base", icon: <KnowledgeBaseIcon /> },
-    { text: "Product Updates", icon: <UpdatesIcon /> },
+    { text: "Products", icon: <KnowledgeBaseIcon />, link: "/" },
+    {
+      text: "Create",
+      icon: <DesignServicesIcon />,
+      link: "/createproduct",
+    },
     // Add more info items here
   ];
 
@@ -73,34 +80,37 @@ export default function SideBar() {
           },
         }}
       >
-        <Toolbar />
+        <Toolbar>
+          <IconButton onClick={handleDrawerToggle}>
+            <ChevronLeftIcon />
+          </IconButton>
+        </Toolbar>
         <Box
           component="main"
           sx={{
             overflow: "auto",
-            bgcolor: "rgb(246, 243, 243)",
             height: "100vh",
           }}
         >
-          <List>
+          <List sx={{ width: 60 }}>
             {menuItems.map((menuItem, index) => (
               <ListItem key={menuItem.text} disablePadding>
-                <ListItemButton>
+                <ListItemButton component={Link} to={menuItem.link}>
                   <ListItemIcon>{menuItem.icon}</ListItemIcon>
                   <ListItemText
                     primary={menuItem.text}
                     primaryTypographyProps={{ style: { marginLeft: "-8px" } }}
-                  />{" "}
+                  />
                   {/* Adjust the left margin */}
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
           <Divider />
-          <List>
+          <List sx={{ width: 60 }}>
             {infoItems.map((menuItem, index) => (
               <ListItem key={menuItem.text} disablePadding>
-                <ListItemButton>
+                <ListItemButton component={Link} to={menuItem.link}>
                   <ListItemIcon>{menuItem.icon}</ListItemIcon>
                   <ListItemText
                     primary={menuItem.text}

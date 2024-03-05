@@ -27,7 +27,7 @@ body {
   color: #888;
 }
 .css-0 {
-  height: 140vh;
+  /* height: 140vh; */
   background-color: inherit;
 }
 
@@ -52,4 +52,8 @@ a {
 div {
   width: 100%;
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.css-1ccrgrp {
+  background-color: rgba(255, 255, 255, 0) !important;
 }

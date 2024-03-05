@@ -10,37 +10,58 @@ import CreateProductPage from "../Pages/CreateProductPage";
 function AppRoutes(props) {
   return (
     <Routes>
-      {/* <Route
-        index
-        element={
-          <ProtectedRoute>
-            <DashBoardPage {...props} />
-          </ProtectedRoute>
-        }
-      /> */}
-      {/* <Route
-        path="/:id"
-        element={
-          <ProtectedRoute>
-            <ShowPage />
-          </ProtectedRoute>
-        }
-      /> */}
-      {/* <Route
+      <Route
         path="/profile"
         element={
           <ProtectedRoute>
             <CreateProfilePage />
           </ProtectedRoute>
         }
-      /> */}
+      />
 
-      <Route path="/create" element={<CreateProductPage />} />
-      <Route path="/createuser" element={<CreateProfilePage />} />
-      <Route path="/account" element={<UserAccountPage />} />
-      <Route path="/dashboard" element={<DashBoardPage />} />
+      <Route
+        path="/createproduct"
+        element={
+          <ProtectedRoute>
+            <CreateProductPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/createuser"
+        element={
+          <ProtectedRoute>
+            {" "}
+            <CreateProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/account"
+        element={
+          <ProtectedRoute>
+            <UserAccountPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashBoardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <ProductsPage />
+          </ProtectedRoute>
+        }
+      />
       <Route path="/login" element={<LoginForm />} />
-      <Route path="/" element={<ProductsPage />} />
     </Routes>
   );
 }

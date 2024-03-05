@@ -1,18 +1,15 @@
-// CreateProfilePage.js
-
 import { useState } from "react";
 import { useUserContext } from "../Context/UserContext";
 import Button from "@mui/material/Button";
 import { Card, CardContent, Typography, Box } from "@mui/material";
-import Form from "../Components/CreateProfileComponent";
-import Navbar from "../Components/NavBar";
+import NavBar from "../Components/NavBar";
 
-export default function UserAccountPage() {
+export default function ProfilePage() {
   const { currentUser, handleUpdateUser, handleLogOut } = useUserContext();
 
   return (
     <>
-      <Navbar></Navbar>
+      <NavBar />
       <Box
         sx={{
           height: "100vh",

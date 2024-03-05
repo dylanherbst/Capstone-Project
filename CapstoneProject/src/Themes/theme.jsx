@@ -13,6 +13,30 @@ const colors = {
 
 // Create a theme instance
 const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 4,
+          textTransform: "none",
+        },
+        contained: {
+          backgroundColor: "#007FFF",
+          color: "#FFFFFF",
+          "&:hover": {
+            backgroundColor: "#0059B2",
+          },
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+        },
+      },
+    },
+  },
   palette: {
     primary: {
       main: colors.primary,
@@ -33,11 +57,15 @@ const theme = createTheme({
       main: colors.success,
     },
     background: {
-      default: "	rgb(229, 228, 226, 0.2)", // Set your desired background color here
+      default: "	rgb(0, 191, 255, 0.07)", // Set your desired background color here
     },
   },
   typography: {
-    fontFamily: "Source Sans Pro, sans-serif",
+    fontFamily: "sans-serif;",
+  },
+  text: {
+    primary: "#202124", // Dark gray for text
+    secondary: "#5f6368", // Medium gray for secondary text
   },
 });
 

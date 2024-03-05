@@ -8,6 +8,7 @@ const style = {
   p: 2,
   margin: "auto",
   //   height: "100%",
+  marginBottom: "60px",
 };
 
 const fieldStyle = {
@@ -59,12 +60,24 @@ const CreateProductForm = ({ onAdd }) => {
     }
   };
 
+  // const handleFileChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     setNewProduct({ ...newProduct, image: file });
+  //     setPreviewImage(URL.createObjectURL(file));
+  //   }
+  // };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      setNewProduct({ ...newProduct, image: file });
+      setImageFile(file);
       setPreviewImage(URL.createObjectURL(file));
     }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission
+    await handleAddProduct(); // Call your function to add the product
   };
 
   return (
@@ -104,7 +117,7 @@ const CreateProductForm = ({ onAdd }) => {
             }}
           />
         </Box>
-        <Box sx={{ ...fieldStyle, height: "120px" }}>
+        <Box sx={{ ...fieldStyle, height: "140px" }}>
           <Typography variant="h10" component="h5">
             Product Description
           </Typography>
@@ -127,54 +140,64 @@ const CreateProductForm = ({ onAdd }) => {
         </Box>
 
         {/* IMAGE ADD */}
-        <Box sx={{ ...fieldStyle, height: "140px" }}>
-          <Typography variant="h10" component="h5" sx={{ marginBottom: "8px" }}>
-            Product Image
-          </Typography>
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <Box sx={{ ...fieldStyle, height: "220px" }}>
+            <Typography
+              variant="h10"
+              component="h5"
+              sx={{ marginBottom: "8px" }}
+            >
+              Product Image
+            </Typography>
 
-          <Box
-            sx={{
-              border: "1px dashed #bbb", // Dotted border
-              borderRadius: "4px", // Match the border radius of TextField
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "40px", // Adjust the padding as needed
-              gap: "10px", // Adjust the gap between the text and button as needed
-            }}
-          >
-            <Typography>Image URL</Typography>
-            <Button
-              variant="contained"
-              component="label"
-              color="primary"
-              size="small"
+            <Box
               sx={{
-                marginRight: "10px",
-                padding: "4px 8px",
-                minWidth: "auto",
-                fontSize: "0.75rem",
+                border: "1px dashed #bbb", // Dotted border
+                borderRadius: "4px", // Match the border radius of TextField
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "40px", // Adjust the padding as needed
+                gap: "10px", // Adjust the gap between the text and button as needed
               }}
             >
-              Add File
-              <input type="file" hidden onChange={handleFileChange} />
-            </Button>
-            {previewImage && (
-              <Box
-                component="img"
-                src={previewImage}
-                alt="Preview"
+              <Typography>Image URL</Typography>
+              <Button
+                variant="contained"
+                component="label"
+                color="primary"
+                size="small"
                 sx={{
-                  maxWidth: "100%",
-                  maxHeight: "100px", // Adjust the max height as needed
-                  objectFit: "contain",
-                  marginTop: "10px",
+                  marginRight: "10px",
+                  padding: "4px 8px",
+                  minWidth: "auto",
+                  fontSize: "0.75rem",
                 }}
-              />
-            )}
+              >
+                Add File
+                <input
+                  type="file"
+                  name="img"
+                  hidden
+                  onChange={handleFileChange}
+                />
+              </Button>
+              {previewImage && (
+                <Box
+                  component="img"
+                  src={previewImage}
+                  alt="Preview"
+                  sx={{
+                    maxWidth: "100%",
+                    maxHeight: "100px", // Adjust the max height as needed
+                    objectFit: "contain",
+                    marginTop: "10px",
+                  }}
+                />
+              )}
+            </Box>
           </Box>
-        </Box>
-
+        </form>
         {/* IMAGE ADD >>>> */}
         <Box sx={{ ...fieldStyle, height: "100px" }}>
           <Typography variant="h10" component="h5">
