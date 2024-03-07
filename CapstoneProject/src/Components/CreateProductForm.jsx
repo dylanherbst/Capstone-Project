@@ -9,6 +9,7 @@ const style = {
   margin: "auto",
   //   height: "100%",
   marginBottom: "60px",
+  borderRadius: "20px",
 };
 
 const fieldStyle = {
@@ -27,9 +28,30 @@ const CreateProductForm = ({ onAdd }) => {
   const [imageFile, setImageFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 
+  /// //// /// /// /// OLD VERSION WOKRING /// / /// /// /
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNewProduct({ ...newProduct, [name]: value });
+  //   console.log(`Updated state: ${name} = ${value}`);
+  //   console.log(`New product state:`, newProduct);
+  // };
+
+  // // /// / /// TESTING VERSION /// // /// /// /// /
+  // const handleChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setNewProduct((prevProduct) => ({
+  //     ...prevProduct,
+  //     [name]: value,
+  //   }));
+  // };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
+    setNewProduct((prevProduct) => {
+      const updatedProduct = { ...prevProduct, [name]: value };
+      console.log(`Updated product state 2:`, updatedProduct); // Log the updated state
+      return updatedProduct;
+    });
   };
 
   const handleAddProduct = async () => {
@@ -44,6 +66,7 @@ const CreateProductForm = ({ onAdd }) => {
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
+    console.log("New product state before API call:", newProduct);
     try {
       const response = await axios.post(
         "http://localhost:8081/api/products",
@@ -60,13 +83,6 @@ const CreateProductForm = ({ onAdd }) => {
     }
   };
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setNewProduct({ ...newProduct, image: file });
-  //     setPreviewImage(URL.createObjectURL(file));
-  //   }
-  // };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -103,16 +119,15 @@ const CreateProductForm = ({ onAdd }) => {
             Product Name
           </Typography>
           <TextField
+            id="name"
             label="Name"
             name="name"
             value={newProduct.name}
             onChange={handleChange}
             fullWidth
-            multiline
-            rows={1}
+            // multiline
+            // rows={1}
             sx={{
-              //   height: 40,
-              //   input: { height: 8 },
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
             }}
           />
@@ -122,6 +137,7 @@ const CreateProductForm = ({ onAdd }) => {
             Product Description
           </Typography>
           <TextField
+            id="description"
             label="Description"
             name="desc"
             value={newProduct.description}
@@ -204,6 +220,7 @@ const CreateProductForm = ({ onAdd }) => {
             Product Price
           </Typography>
           <TextField
+            id="price"
             label="Price"
             name="price"
             type="number"
@@ -222,6 +239,7 @@ const CreateProductForm = ({ onAdd }) => {
             Available Stock
           </Typography>
           <TextField
+            id="stock"
             label="Stock"
             name="stock"
             type="number"

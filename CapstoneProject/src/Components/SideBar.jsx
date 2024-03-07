@@ -30,30 +30,42 @@ import { useState } from "react";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import DesignServicesIcon from "@mui/icons-material/DesignServices";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../Context/UserContext";
 
 const drawerWidth = 240;
 export default function SideBar() {
+  const { currentUser, handleUpdateUser, handleLogOut } = useUserContext();
   const [open, setOpen] = useState(false);
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
 
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, link: "/dashboard" },
-    { text: "Accounts", icon: <ManageAccountsIcon />, link: "/createuser" },
-    // Add more menu items here
+    { text: "Dashboard", icon: <DashboardIcon />, link: "/" },
+    { text: "Accounts", icon: <SupervisorAccountIcon />, link: "/admins" },
+    {
+      text: "Create/Accounts",
+      icon: <ManageAccountsIcon />,
+      link: "/createuser",
+    },
   ];
 
   const infoItems = [
-    { text: "Products", icon: <KnowledgeBaseIcon />, link: "/" },
+    { text: "Products", icon: <KnowledgeBaseIcon />, link: "/products" },
     {
       text: "Create",
       icon: <DesignServicesIcon />,
       link: "/createproduct",
     },
-    // Add more info items here
+    {
+      text: "LogOut",
+      icon: <LogoutIcon />,
+      onClick: handleLogOut,
+    },
   ];
 
   return (
@@ -109,13 +121,17 @@ export default function SideBar() {
           <Divider />
           <List sx={{ width: 60 }}>
             {infoItems.map((menuItem, index) => (
-              <ListItem key={menuItem.text} disablePadding>
+              <ListItem
+                key={menuItem.text}
+                onClick={menuItem.onClick}
+                disablePadding
+              >
                 <ListItemButton component={Link} to={menuItem.link}>
                   <ListItemIcon>{menuItem.icon}</ListItemIcon>
                   <ListItemText
                     primary={menuItem.text}
                     primaryTypographyProps={{ style: { marginLeft: "-8px" } }}
-                  />{" "}
+                  />
                   {/* Adjust the left margin */}
                 </ListItemButton>
               </ListItem>

@@ -6,6 +6,7 @@ import UserAccountPage from "../Pages/UserAccountPage";
 import DashBoardPage from "../Pages/DashBoardPage";
 import ProductsPage from "../Pages/ProductPage";
 import CreateProductPage from "../Pages/CreateProductPage";
+import AdminPage from "../Pages/AdminListPage";
 
 function AppRoutes(props) {
   return (
@@ -45,7 +46,7 @@ function AppRoutes(props) {
         }
       />
       <Route
-        path="/dashboard"
+        path="/"
         element={
           <ProtectedRoute>
             <DashBoardPage />
@@ -54,10 +55,18 @@ function AppRoutes(props) {
       />
 
       <Route
-        path="/"
+        path="/products"
         element={
           <ProtectedRoute>
             <ProductsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admins"
+        element={
+          <ProtectedRoute>
+            <AdminPage />
           </ProtectedRoute>
         }
       />
