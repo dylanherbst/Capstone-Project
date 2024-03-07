@@ -14,6 +14,16 @@ Ecom Admin App: An eCommerce web application with an administrative panel that e
 - **Nivo:** For data visualization (if used in the app).
 - **Environment Variables:** Set up the required environment variables in a `.env` file in the root of the project. See the `.env.example` file for a template.
 
+## NPM INSTALL LIST
+
+npm install --save-dev nodemon
+npm install cors
+npm install formik yup
+npm install @mui/material @emotion/react @emotion/styled
+npm install react-router-dom
+npm install axios
+npm install @nivo/core @nivo/bar
+
 STEP 1. Clone the repository:
 
 git clone https://github.com/yourusername/your-repository.git
