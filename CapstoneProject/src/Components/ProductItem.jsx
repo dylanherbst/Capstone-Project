@@ -64,24 +64,23 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
         <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
           <Box
             sx={{
-              width: 50, // Adjust the width of the image box
-              height: 50, // Adjust the height of the image box
+              width: 50,
+              height: 50,
               overflow: "hidden",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderRadius: "4px", // Optional: for rounded corners
+              borderRadius: "4px",
             }}
           >
             {product.img ? (
               <img
-                // src={product.img}
                 src={imageUrl}
                 alt={product.name}
                 style={{ width: "100%", height: "auto" }}
               />
             ) : (
-              <ImageNotSupportedIcon /> // Display an icon if there is no valid image
+              <ImageNotSupportedIcon />
             )}
           </Box>
         </TableCell>
@@ -161,8 +160,6 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
             multiline
             rows={3}
             sx={{
-              //   height: 60,
-              //   input: { height: 40 },
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
               ".MuiInputBase-input": { fontSize: "0.8rem" },
             }}

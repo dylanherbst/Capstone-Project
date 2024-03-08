@@ -7,7 +7,7 @@ const style = {
   bgcolor: "background.paper",
   p: 2,
   margin: "auto",
-  //   height: "100%",
+
   marginBottom: "60px",
   borderRadius: "20px",
 };
@@ -28,28 +28,11 @@ const CreateProductForm = ({ onAdd }) => {
   const [imageFile, setImageFile] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
 
-  /// //// /// /// /// OLD VERSION WOKRING /// / /// /// /
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setNewProduct({ ...newProduct, [name]: value });
-  //   console.log(`Updated state: ${name} = ${value}`);
-  //   console.log(`New product state:`, newProduct);
-  // };
-
-  // // /// / /// TESTING VERSION /// // /// /// /// /
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setNewProduct((prevProduct) => ({
-  //     ...prevProduct,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewProduct((prevProduct) => {
       const updatedProduct = { ...prevProduct, [name]: value };
-      console.log(`Updated product state 2:`, updatedProduct); // Log the updated state
+      console.log(`Updated product state 2:`, updatedProduct);
       return updatedProduct;
     });
   };
@@ -77,7 +60,7 @@ const CreateProductForm = ({ onAdd }) => {
           },
         }
       );
-      onAdd(response.data); // Call the onAdd callback with the response data
+      onAdd(response.data);
     } catch (error) {
       console.error("Error adding product:", error);
     }
@@ -92,8 +75,8 @@ const CreateProductForm = ({ onAdd }) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    await handleAddProduct(); // Call your function to add the product
+    event.preventDefault();
+    await handleAddProduct();
   };
 
   return (
@@ -103,7 +86,7 @@ const CreateProductForm = ({ onAdd }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "0 40px", // Adjust the padding as needed
+          padding: "0 40px",
           marginBottom: "20px",
         }}
       >
@@ -125,8 +108,6 @@ const CreateProductForm = ({ onAdd }) => {
             value={newProduct.name}
             onChange={handleChange}
             fullWidth
-            // multiline
-            // rows={1}
             sx={{
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
             }}
@@ -147,8 +128,6 @@ const CreateProductForm = ({ onAdd }) => {
             rows={3}
             margin="normal"
             sx={{
-              //   height: 60,
-              //   input: { height: 40 },
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
               ".MuiInputBase-input": { fontSize: "0.8rem" },
             }}
@@ -168,13 +147,13 @@ const CreateProductForm = ({ onAdd }) => {
 
             <Box
               sx={{
-                border: "1px dashed #bbb", // Dotted border
-                borderRadius: "4px", // Match the border radius of TextField
+                border: "1px dashed #bbb",
+                borderRadius: "4px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: "40px", // Adjust the padding as needed
-                gap: "10px", // Adjust the gap between the text and button as needed
+                padding: "40px",
+                gap: "10px",
               }}
             >
               <Typography>Image URL</Typography>
@@ -205,7 +184,7 @@ const CreateProductForm = ({ onAdd }) => {
                   alt="Preview"
                   sx={{
                     maxWidth: "100%",
-                    maxHeight: "100px", // Adjust the max height as needed
+                    maxHeight: "100px",
                     objectFit: "contain",
                     marginTop: "10px",
                   }}
@@ -268,12 +247,3 @@ const CreateProductForm = ({ onAdd }) => {
 };
 
 export default CreateProductForm;
-
-// const handleAddProduct = async () => {
-//   try {
-//     await axios.post("http://localhost:8081/api/products", newProduct);
-//     onAdd(); // Refresh the product list
-//   } catch (error) {
-//     console.error("Error adding product:", error);
-//   }
-// };

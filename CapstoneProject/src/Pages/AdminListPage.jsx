@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import NavBar from "../Components/NavBar";
 import { Typography, Box } from "@mui/material";
-import AdminList from "../Components/AdminList"; // assuming you have an AdminList component
+import AdminList from "../Components/AdminList";
 import AdminManagement from "../Components/AdminManger";
 const AdminPage = () => {
   const style = {
     p: 2,
     margin: "auto",
     marginBottom: "50px",
-    //   height: "100%",
   };
   return (
     <div>
