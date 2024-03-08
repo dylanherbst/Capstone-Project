@@ -15,7 +15,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import CreateProductModal from "../Components/CreateProductModal";
 import { Link } from "react-router-dom";
 import NavBar from "../Components/NavBar";
 
@@ -93,7 +92,7 @@ const ProductPage = () => {
       </Box>
 
       <Box sx={style}>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} sx={{ borderRadius: "20px" }}>
           <Table>
             <TableHead>
               <TableRow>
@@ -132,17 +131,3 @@ const ProductPage = () => {
 };
 
 export default ProductPage;
-
-{
-  /* {products.map((product) => (
-        <ProductItem
-          key={product.id}
-          product={product}
-          onUpdate={updateProduct}
-          onDelete={deleteProduct}
-        />
-      ))}
-    </div>
-  );
-}; */
-}

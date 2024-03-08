@@ -13,6 +13,9 @@ export default function UserAccountPage() {
   return (
     <>
       <Navbar></Navbar>
+      <Typography sx={{ margin: "25px" }} variant="h5">
+        Your Porfile
+      </Typography>
       <Box
         sx={{
           height: "100vh",
@@ -24,9 +27,14 @@ export default function UserAccountPage() {
           boxSizing: "border-box",
         }}
       >
-        <h1>Your Account</h1>
-
-        <Card sx={{ width: "90%", margin: "20px auto", maxWidth: "1800px" }}>
+        <Card
+          sx={{
+            width: "70%",
+            margin: "20px auto",
+            maxWidth: "1800px",
+            borderRadius: "15px",
+          }}
+        >
           <CardContent
             sx={{
               width: "80%",
@@ -35,8 +43,10 @@ export default function UserAccountPage() {
             }}
           >
             <Typography variant="h7" sx={{ fontWeight: "bold" }}>
-              <h2>{currentUser.userName}</h2>
-              <h3>{currentUser.email}</h3>
+              <h3>Name:</h3>
+              <h4>{currentUser.userName}</h4>
+              <h3>Email:</h3>
+              <h4> {currentUser.email}</h4>
               <Button
                 variant="contained"
                 color="primary"

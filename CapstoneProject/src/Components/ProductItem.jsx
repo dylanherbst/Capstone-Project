@@ -26,11 +26,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 800,
+  height: 550,
   bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  borderRadius: "15px",
+  boxShadow: 14,
+  p: 8,
 };
 
 const ProductItem = ({ product, onUpdate, onDelete }) => {
@@ -63,24 +64,23 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
         <TableCell sx={{ borderRight: "none", borderLeft: "none" }}>
           <Box
             sx={{
-              width: 50, // Adjust the width of the image box
-              height: 50, // Adjust the height of the image box
+              width: 50,
+              height: 50,
               overflow: "hidden",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              borderRadius: "4px", // Optional: for rounded corners
+              borderRadius: "4px",
             }}
           >
             {product.img ? (
               <img
-                // src={product.img}
                 src={imageUrl}
                 alt={product.name}
                 style={{ width: "100%", height: "auto" }}
               />
             ) : (
-              <ImageNotSupportedIcon /> // Display an icon if there is no valid image
+              <ImageNotSupportedIcon />
             )}
           </Box>
         </TableCell>
@@ -135,7 +135,12 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            marginBottom="20px"
+          >
             Update Product
           </Typography>
           <TextField
@@ -152,7 +157,14 @@ const ProductItem = ({ product, onUpdate, onDelete }) => {
             onChange={handleChange}
             fullWidth
             margin="normal"
+            multiline
+            rows={3}
+            sx={{
+              ".MuiInputLabel-root": { fontSize: "0.8rem" },
+              ".MuiInputBase-input": { fontSize: "0.8rem" },
+            }}
           />
+
           <TextField
             label="Price"
             name="price"

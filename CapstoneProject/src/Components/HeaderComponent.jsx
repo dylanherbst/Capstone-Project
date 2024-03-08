@@ -4,17 +4,12 @@ const Header = ({ title, subtitle }) => {
   const theme = useTheme();
 
   return (
-    <Box
-      mb="30px"
-      display="flex"
-      flexDirection="column"
-      alignItems="center" // Center the content horizontally
-    >
+    <Box mb="30px" display="flex" flexDirection="column" alignItems="center">
       <Typography
         variant="h2"
         color={theme.palette.secondary.main}
         fontWeight="bold"
-        textAlign="center" // Center the text
+        textAlign="center"
         sx={{ m: "0 0 5px 0" }}
       >
         {title}
@@ -22,7 +17,7 @@ const Header = ({ title, subtitle }) => {
       <Typography
         variant="h5"
         color={theme.palette.secondary.main}
-        textAlign="center" // Center the text
+        textAlign="center"
       >
         {subtitle}
       </Typography>

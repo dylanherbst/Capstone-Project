@@ -13,6 +13,9 @@ export default function CreateProfilePage() {
   return (
     <>
       <NavBar />
+      <Typography sx={{ margin: "25px" }} variant="h5">
+        Create Profile
+      </Typography>
       <NewUserForm />
     </>
   );

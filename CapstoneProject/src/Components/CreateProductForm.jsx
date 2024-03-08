@@ -7,8 +7,9 @@ const style = {
   bgcolor: "background.paper",
   p: 2,
   margin: "auto",
-  //   height: "100%",
+
   marginBottom: "60px",
+  borderRadius: "20px",
 };
 
 const fieldStyle = {
@@ -29,7 +30,11 @@ const CreateProductForm = ({ onAdd }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewProduct({ ...newProduct, [name]: value });
+    setNewProduct((prevProduct) => {
+      const updatedProduct = { ...prevProduct, [name]: value };
+      console.log(`Updated product state 2:`, updatedProduct);
+      return updatedProduct;
+    });
   };
 
   const handleAddProduct = async () => {
@@ -44,6 +49,7 @@ const CreateProductForm = ({ onAdd }) => {
     for (let [key, value] of formData.entries()) {
       console.log(key, value);
     }
+    console.log("New product state before API call:", newProduct);
     try {
       const response = await axios.post(
         "http://localhost:8081/api/products",
@@ -54,19 +60,12 @@ const CreateProductForm = ({ onAdd }) => {
           },
         }
       );
-      onAdd(response.data); // Call the onAdd callback with the response data
+      onAdd(response.data);
     } catch (error) {
       console.error("Error adding product:", error);
     }
   };
 
-  // const handleFileChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setNewProduct({ ...newProduct, image: file });
-  //     setPreviewImage(URL.createObjectURL(file));
-  //   }
-  // };
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -76,8 +75,8 @@ const CreateProductForm = ({ onAdd }) => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submission
-    await handleAddProduct(); // Call your function to add the product
+    event.preventDefault();
+    await handleAddProduct();
   };
 
   return (
@@ -87,7 +86,7 @@ const CreateProductForm = ({ onAdd }) => {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: "0 40px", // Adjust the padding as needed
+          padding: "0 40px",
           marginBottom: "20px",
         }}
       >
@@ -103,16 +102,13 @@ const CreateProductForm = ({ onAdd }) => {
             Product Name
           </Typography>
           <TextField
+            id="name"
             label="Name"
             name="name"
             value={newProduct.name}
             onChange={handleChange}
             fullWidth
-            multiline
-            rows={1}
             sx={{
-              //   height: 40,
-              //   input: { height: 8 },
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
             }}
           />
@@ -122,6 +118,7 @@ const CreateProductForm = ({ onAdd }) => {
             Product Description
           </Typography>
           <TextField
+            id="description"
             label="Description"
             name="desc"
             value={newProduct.description}
@@ -131,8 +128,6 @@ const CreateProductForm = ({ onAdd }) => {
             rows={3}
             margin="normal"
             sx={{
-              //   height: 60,
-              //   input: { height: 40 },
               ".MuiInputLabel-root": { fontSize: "0.8rem" },
               ".MuiInputBase-input": { fontSize: "0.8rem" },
             }}
@@ -152,13 +147,13 @@ const CreateProductForm = ({ onAdd }) => {
 
             <Box
               sx={{
-                border: "1px dashed #bbb", // Dotted border
-                borderRadius: "4px", // Match the border radius of TextField
+                border: "1px dashed #bbb",
+                borderRadius: "4px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: "40px", // Adjust the padding as needed
-                gap: "10px", // Adjust the gap between the text and button as needed
+                padding: "40px",
+                gap: "10px",
               }}
             >
               <Typography>Image URL</Typography>
@@ -189,7 +184,7 @@ const CreateProductForm = ({ onAdd }) => {
                   alt="Preview"
                   sx={{
                     maxWidth: "100%",
-                    maxHeight: "100px", // Adjust the max height as needed
+                    maxHeight: "100px",
                     objectFit: "contain",
                     marginTop: "10px",
                   }}
@@ -204,6 +199,7 @@ const CreateProductForm = ({ onAdd }) => {
             Product Price
           </Typography>
           <TextField
+            id="price"
             label="Price"
             name="price"
             type="number"
@@ -222,6 +218,7 @@ const CreateProductForm = ({ onAdd }) => {
             Available Stock
           </Typography>
           <TextField
+            id="stock"
             label="Stock"
             name="stock"
             type="number"
@@ -250,12 +247,3 @@ const CreateProductForm = ({ onAdd }) => {
 };
 
 export default CreateProductForm;
-
-// const handleAddProduct = async () => {
-//   try {
-//     await axios.post("http://localhost:8081/api/products", newProduct);
-//     onAdd(); // Refresh the product list
-//   } catch (error) {
-//     console.error("Error adding product:", error);
-//   }
-// };

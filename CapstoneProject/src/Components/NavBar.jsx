@@ -29,26 +29,7 @@ const Navbar = () => {
       }}
     >
       <SideBar></SideBar>
-      {/* SEARCH BAR */}
-      {/* <Box
-        display="flex"
-        alignItems="center"
-        backgroundColor={theme.palette.primary.main}
-        borderRadius="3px"
-        marginLeft="-300px"
-        sx={{
-          boxShadow: "none !important",
-          "& .MuiPaper-root": {
-            boxShadow: "none !important",
-          },
-        }}
-      >
-        <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
-        <IconButton type="button" sx={{ p: "10px" }}>
-          <SearchIcon />
-        </IconButton>
-      </Box> */}
-      {/* ICONS */}
+
       <Box display="flex" justifyContent="flex-end">
         <Typography sx={{ margin: "15px" }}> {currentUser.userName}</Typography>
         <IconButton component={Link} to="/account">
